@@ -22,7 +22,7 @@ resource "google_compute_firewall" "custom-allow-ssh-iap" {
     protocol = "tcp"
     ports    = ["22"]
   }
-  priority = "995"
+  priority      = "995"
   source_ranges = ["35.235.240.0/20"]
 }
 
@@ -32,6 +32,6 @@ resource "google_compute_firewall" "custom-allow-internal" {
   allow {
     protocol = "all"
   }
-  priority = "995"
+  priority      = "995"
   source_ranges = ["10.0.0.0/8"]
 }
