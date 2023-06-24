@@ -1,6 +1,6 @@
 resource "google_compute_firewall" "custom-allow-ssh-iap" {
   name    = "custom-allow-ssh-iap"
-  network = google_compute_network.custom-vpc.self_link
+  network = google_compute_network.custom-vpc.id
   allow {
     protocol = "tcp"
     ports    = ["22"]
@@ -11,7 +11,7 @@ resource "google_compute_firewall" "custom-allow-ssh-iap" {
 
 resource "google_compute_firewall" "custom-allow-internal" {
   name    = "custom-allow-internal"
-  network = google_compute_network.custom-vpc.self_link
+  network = google_compute_network.custom-vpc.id
   allow {
     protocol = "all"
   }
