@@ -1,5 +1,5 @@
-resource "google_compute_firewall" "custom-allow-ssh-iap" {
-  name    = "custom-allow-ssh-iap"
+resource "google_compute_firewall" "custom-allow-ssh" {
+  name    = "custom-allow-ssh"
   network = google_compute_network.custom-vpc.id
 
   allow {
@@ -8,7 +8,9 @@ resource "google_compute_firewall" "custom-allow-ssh-iap" {
   }
 
   priority      = "995"
-  source_ranges = ["35.235.240.0/20"]
+  source_ranges = ["0.0.0.0/0"]
+  // Connection via IAP for VMs without external IP
+  //source_ranges = ["35.235.240.0/20"]
 }
 
 resource "google_compute_firewall" "custom-allow-internal" {
