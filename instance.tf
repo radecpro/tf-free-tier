@@ -1,7 +1,7 @@
-resource "google_compute_instance" "nginx-web-1" {
-  name         = "nginx-web-1"
-  machine_type = "e2-micro"
-  zone         = "us-east1-c"
+resource "google_compute_instance" "nginx-web" {
+  name         = var.instance_name
+  machine_type = var.instance_type
+  zone         = var.instance_zone
 
   tags = ["web"]
 
@@ -17,7 +17,7 @@ resource "google_compute_instance" "nginx-web-1" {
 
   network_interface {
     network    = google_compute_network.custom-vpc.id
-    subnetwork = google_compute_subnetwork.carolina-subnet.id
+    subnetwork = google_compute_subnetwork.front-subnet.id
     access_config {
       // Ephemeral public IP
     }
