@@ -38,3 +38,19 @@ variable "subnet_region" {
   description = "Region of VPC subnet"
   default     = "us-east1"
 }
+
+variable "company_tag" {
+  type        = string
+  description = "Company name for resource tagging"
+  default     = "NetXApp"
+}
+
+variable "project_tag" {
+  type        = string
+  description = "Project name for resource tagging"
+}
+
+variable "billing_tag" {
+  type        = string
+  description = "Billing code for resource tagging"
+}

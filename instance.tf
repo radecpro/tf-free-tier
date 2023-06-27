@@ -22,4 +22,6 @@ resource "google_compute_instance" "nginx-web" {
       // Ephemeral public IP
     }
   }
+
+  labels = local.common_tags
 }
