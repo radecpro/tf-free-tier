@@ -1,7 +1,8 @@
 resource "google_compute_instance" "nginx-web" {
-  name         = var.instance_name
+  name         = "${var.instance_name}-${count.index + 1}"
   machine_type = var.instance_type
   zone         = var.instance_zone
+  count        = var.instance_count
 
   tags = ["web"]
 

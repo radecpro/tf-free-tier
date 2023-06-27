@@ -27,6 +27,12 @@ variable "instance_zone" {
   default     = "us-east1-c"
 }
 
+variable "instance_count" {
+  type        = number
+  description = "Number of Google Compute instances"
+  default     = 1
+}
+
 variable "subnet_range" {
   type        = string
   description = "IP CIDR range of VPC subnet"
