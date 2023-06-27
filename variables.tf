@@ -42,7 +42,7 @@ variable "subnet_region" {
 variable "company_tag" {
   type        = string
   description = "Company name for resource tagging"
-  default     = "NetXApp"
+  default     = "netxapp"
 }
 
 variable "project_tag" {

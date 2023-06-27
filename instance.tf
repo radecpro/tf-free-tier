@@ -24,4 +24,8 @@ resource "google_compute_instance" "nginx-web" {
   }
 
   labels = local.common_tags
+
+  lifecycle {
+    ignore_changes = [metadata["ssh-keys"]]
+  }
 }
