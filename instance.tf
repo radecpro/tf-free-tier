@@ -1,7 +1,7 @@
 resource "google_compute_instance" "nginx-web" {
   name         = "${var.instance_name}-${count.index + 1}"
   machine_type = var.instance_type
-  zone         = var.instance_zone
+  zone         = var.instance_zone[count.index]
   count        = var.instance_count
 
   tags = ["web"]
@@ -18,7 +18,7 @@ resource "google_compute_instance" "nginx-web" {
 
   network_interface {
     network    = google_compute_network.custom-vpc.id
-    subnetwork = google_compute_subnetwork.front-subnet.id
+    subnetwork = count.index == 0 ? google_compute_subnetwork.front-subnet1.id : google_compute_subnetwork.front-subnet2.id
     access_config {
       // Ephemeral public IP
     }

@@ -22,9 +22,9 @@ variable "instance_type" {
 }
 
 variable "instance_zone" {
-  type        = string
+  type        = list(string)
   description = "Zone for the Google Compute instance"
-  default     = "us-east1-c"
+  default     = ["us-east1-c", "us-central1-f"]
 }
 
 variable "instance_count" {
@@ -33,16 +33,16 @@ variable "instance_count" {
   default     = 1
 }
 
-variable "subnet_range" {
-  type        = string
-  description = "IP CIDR range of VPC subnet"
-  default     = "10.10.0.0/28"
+variable "subnets_range" {
+  type        = list(string)
+  description = "IP CIDR range of VPC subnets"
+  default     = ["10.10.0.0/28", "10.20.0.0/28"]
 }
 
-variable "subnet_region" {
-  type        = string
-  description = "Region of VPC subnet"
-  default     = "us-east1"
+variable "subnets_region" {
+  type        = list(string)
+  description = "Region of VPC subnets"
+  default     = ["us-east1", "us-central1"]
 }
 
 variable "company_tag" {
