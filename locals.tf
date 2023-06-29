@@ -5,3 +5,8 @@ locals {
     billing = var.billing_tag
   }
 }
+
+resource "random_integer" "gcs" {
+  min = 10000
+  max = 99999
+}
