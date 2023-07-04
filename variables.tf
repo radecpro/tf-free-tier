@@ -10,6 +10,12 @@ variable "gcp_zone" {
   default     = "us-east1-c"
 }
 
+variable "gcs_region" {
+  type        = string
+  description = "Location of the GCS bucket"
+  default     = "US-EAST1"
+}
+
 variable "instance_name" {
   type        = string
   description = "Name for the Google Compute instance"
