@@ -4,7 +4,8 @@ resource "google_compute_instance" "nginx-web" {
   zone         = var.instance_zone[count.index]
   count        = var.instance_count
 
-  tags = ["web"]
+  tags                      = ["web"]
+  allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
@@ -14,7 +15,9 @@ resource "google_compute_instance" "nginx-web" {
     }
   }
 
-  metadata_startup_script = file("./nginx-startup.sh")
+  metadata_startup_script = templatefile("./nginx-startup.sh", {
+    bucket_name = google_storage_bucket.web-storage-bucket.name
+  })
 
   network_interface {
     network    = google_compute_network.custom-vpc.id
@@ -22,6 +25,11 @@ resource "google_compute_instance" "nginx-web" {
     access_config {
       // Ephemeral public IP
     }
+  }
+
+  service_account {
+    email  = google_service_account.vm-gcs-sa.email
+    scopes = ["https://www.googleapis.com/auth/devstorage.read_only"]
   }
 
   labels = local.common_tags
