@@ -21,7 +21,7 @@ resource "google_compute_instance" "nginx-web" {
 
   network_interface {
     network    = google_compute_network.custom-vpc.id
-    subnetwork = count.index == 0 ? google_compute_subnetwork.front-subnet1.id : google_compute_subnetwork.front-subnet2.id
+    subnetwork = google_compute_subnetwork.front-subnets[count.index].id
     access_config {
       // Ephemeral public IP
     }

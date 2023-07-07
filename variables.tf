@@ -51,6 +51,12 @@ variable "subnets_region" {
   default     = ["us-east1", "us-central1"]
 }
 
+variable "subnets_count" {
+  type        = number
+  description = "Number of subnets to create"
+  default     = 1
+}
+
 variable "company_tag" {
   type        = string
   description = "Company name for resource tagging"
