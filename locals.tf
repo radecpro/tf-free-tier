@@ -6,6 +6,11 @@ locals {
   }
 
   gcs_bucket_name = "${var.company_tag}-${var.project_tag}-${random_integer.gcs.result}"
+
+  website_content = {
+    website = "website/index.html"
+    logo    = "website/logo.png"
+  }
 }
 
 resource "random_integer" "gcs" {

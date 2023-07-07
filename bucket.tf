@@ -6,14 +6,9 @@ resource "google_storage_bucket" "web-storage-bucket" {
   labels = local.common_tags
 }
 
-resource "google_storage_bucket_object" "website" {
-  name   = "index.html"
-  source = "./website/index.html"
-  bucket = google_storage_bucket.web-storage-bucket.name
-}
-
-resource "google_storage_bucket_object" "graphic" {
-  name   = "logo.png"
-  source = "./website/logo.png"
-  bucket = google_storage_bucket.web-storage-bucket.name
+resource "google_storage_bucket_object" "website-content" {
+  for_each = local.website_content
+  name     = each.value
+  source   = "${path.root}/${each.value}"
+  bucket   = google_storage_bucket.web-storage-bucket.name
 }
