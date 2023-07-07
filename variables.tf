@@ -39,10 +39,10 @@ variable "instance_count" {
   default     = 1
 }
 
-variable "subnets_range" {
-  type        = list(string)
-  description = "IP CIDR range of VPC subnets"
-  default     = ["10.10.0.0/28", "10.20.0.0/28"]
+variable "vpc_cidr_range" {
+  type        = string
+  description = "IP CIDR range of VPC network"
+  default     = "10.10.0.0/16"
 }
 
 variable "subnets_region" {
@@ -60,7 +60,6 @@ variable "subnets_count" {
 variable "company_tag" {
   type        = string
   description = "Company name for resource tagging"
-  default     = "netxapp"
 }
 
 variable "project_tag" {
@@ -71,4 +70,15 @@ variable "project_tag" {
 variable "billing_tag" {
   type        = string
   description = "Billing code for resource tagging"
+}
+
+variable "naming_prefix" {
+  type        = string
+  description = "Naming prefix for all resources"
+}
+
+variable "environment" {
+  type        = string
+  description = "Environment for the resources"
+  default     = "dev"
 }

@@ -1,5 +1,5 @@
 resource "google_compute_instance" "nginx-web" {
-  name         = "${var.instance_name}-${count.index + 1}"
+  name         = "${local.naming_prefix}-${var.instance_name}-${count.index + 1}"
   machine_type = var.instance_type
   zone         = var.instance_zone[count.index]
   count        = var.instance_count
@@ -15,13 +15,13 @@ resource "google_compute_instance" "nginx-web" {
     }
   }
 
-  metadata_startup_script = templatefile("./nginx-startup.sh", {
+  metadata_startup_script = templatefile("${path.module}/nginx-startup.sh", {
     bucket_name = google_storage_bucket.web-storage-bucket.name
   })
 
   network_interface {
     network    = google_compute_network.custom-vpc.id
-    subnetwork = google_compute_subnetwork.front-subnets[count.index].id
+    subnetwork = google_compute_subnetwork.front-subnets[(count.index % var.subnets_count)].id
     access_config {
       // Ephemeral public IP
     }

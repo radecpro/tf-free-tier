@@ -1,5 +1,5 @@
 resource "google_compute_firewall" "custom-allow-ssh" {
-  name    = "custom-allow-ssh"
+  name    = "${local.naming_prefix}-fw-allow-ssh"
   network = google_compute_network.custom-vpc.id
 
   allow {
@@ -14,7 +14,7 @@ resource "google_compute_firewall" "custom-allow-ssh" {
 }
 
 resource "google_compute_firewall" "custom-allow-internal" {
-  name    = "custom-allow-internal"
+  name    = "${local.naming_prefix}-fw-allow-internal"
   network = google_compute_network.custom-vpc.id
 
   allow {
@@ -26,7 +26,7 @@ resource "google_compute_firewall" "custom-allow-internal" {
 }
 
 resource "google_compute_firewall" "custom-allow-web" {
-  name        = "custom-allow-web"
+  name        = "${local.naming_prefix}-fw-allow-web"
   network     = google_compute_network.custom-vpc.id
   description = "Creates firewall rule targeting frontend instances"
 
