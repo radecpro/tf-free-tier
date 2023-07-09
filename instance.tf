@@ -16,7 +16,7 @@ resource "google_compute_instance" "nginx-web" {
   }
 
   metadata_startup_script = templatefile("${path.module}/nginx-startup.sh", {
-    bucket_name = google_storage_bucket.web-storage-bucket.name
+    bucket_name = module.web-storage-bucket.web-bucket.name
   })
 
   network_interface {

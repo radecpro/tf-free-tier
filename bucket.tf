@@ -1,14 +1,15 @@
-resource "google_storage_bucket" "web-storage-bucket" {
-  name          = local.gcs_bucket_name
-  location      = var.gcs_region
-  force_destroy = true
+module "web-storage-bucket" {
+  source = "./modules/web-storage-bucket"
 
-  labels = local.common_tags
+  bucket_name        = local.gcs_bucket_name
+  bucket_region      = var.gcs_region
+  common_tags        = local.common_tags
+  vm_service_account = google_service_account.vm-gcs-sa.email
 }
 
 resource "google_storage_bucket_object" "website-content" {
   for_each = local.website_content
   name     = each.value
   source   = "${path.root}/${each.value}"
-  bucket   = google_storage_bucket.web-storage-bucket.name
+  bucket   = module.web-storage-bucket.web-bucket.name
 }
