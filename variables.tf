@@ -82,3 +82,8 @@ variable "environment" {
   description = "Environment for the resources"
   default     = "dev"
 }
+
+variable "project_id" {
+  type        = string
+  description = "ID of the GCP project"
+}

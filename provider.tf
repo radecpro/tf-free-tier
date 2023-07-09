@@ -1,5 +1,5 @@
 provider "google" {
-  project = "banded-arcana-369922"
+  project = var.project_id
   region  = var.gcp_region
   zone    = var.gcp_zone
 }
